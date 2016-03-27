@@ -10,4 +10,6 @@ public interface IMaxValueDS {
     boolean remove(String item);
     int getValue(String item);
     Set<String> getMaxValues();
+
+    void printStatus();
 }

@@ -15,15 +15,18 @@ public class MaxValueDSImpl implements IMaxValueDS {
         int newCount = (currentCount==null) ? 1 : currentCount+1;
         countersMap.add(newCount, item);
         itemsMap.put(item, newCount);
+        System.out.println("Item Added: "+item);
     }
 
     @Override
     public boolean remove(String item) {
         Integer currentCount = itemsMap.remove(item);
         if(currentCount==null) {
+            System.out.println("Item not found, not Removed: "+item);
             return false;
         }
         else {
+            System.out.println("Item Removed: "+item);
             return countersMap.remove(currentCount, item);
         }
     }
@@ -36,6 +39,14 @@ public class MaxValueDSImpl implements IMaxValueDS {
     @Override
     public Set<String> getMaxValues() {
         return countersMap.getMaxValues();
+    }
+
+    @Override
+    public void printStatus() {
+        System.out.println("================");
+        System.out.println("itemsMap    = "+itemsMap);
+        System.out.println("countersMap = \n"+countersMap);
+        System.out.println("================");
     }
 
     private class CountersMap {
@@ -73,11 +84,22 @@ public class MaxValueDSImpl implements IMaxValueDS {
             return true;
         }
 
-        public Set<String> getMaxValues() {
+        Set<String> getMaxValues() {
             Set<String> itemsSet = innerCountersMap.lastEntry().getValue();
             assert itemsSet!=null : "innerCountersMap has no data";
             return itemsSet;
         }
+        
+        public String toString(){
+            StringBuilder sb = new StringBuilder();
+            for(Map.Entry<Integer, Set<String>> entry : innerCountersMap.entrySet()) {
+                Integer key = entry.getKey();
+                Set<String> value = entry.getValue();
+                sb.append("              ").append(key).append(" => ").append(value).append("\n");
+            }
+            return sb.toString();
+        }
+
     }
 
 }
