@@ -24,6 +24,7 @@ public class MaxValueDSImplTest {
     public void add() throws Exception {
         for (String item:itemsList) {
             maxValueDSImpl.add(item);
+            maxValueDSImpl.printStatus();
         }
         Set<String> maxValues = maxValueDSImpl.getMaxValues();
         System.out.println("maxValues = "+maxValues);

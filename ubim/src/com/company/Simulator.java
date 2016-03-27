@@ -44,25 +44,17 @@ public class Simulator implements ISimulator{
     public Set<String> stop() {
         System.out.println("Stopping itemsAdderThread...");
         isStop = true;
-/*
-        try {
-            itemsAdderThread.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-*/
         return maxValueDS.getMaxValues();
     }
 
-    public static void main(String[] args)  {
+    public static void main(String[] args) throws InterruptedException {
 
-        String[] itemsPool = "abcdefghijklmnopqrstuvwxyz".split("");
+        String[] itemsPool = "abcdef".split("");
+//        String[] itemsPool = "abcdefghijklmnopqrstuvwxyz".split("");
 
         Simulator simulator = new Simulator(itemsPool);
         simulator.start();
-        for (int i = 0; i < 1000000000; i++) {
-            // do nothing, bussy waiting
-        }
+        Thread.sleep(30*1000);
         Set<String> maxValuesOnTermination = simulator.stop();
         System.out.println("maxValuesOnTermination = "+maxValuesOnTermination);
 

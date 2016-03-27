@@ -11,5 +11,5 @@ public interface IMaxValueDS {
     int getValue(String item);
     Set<String> getMaxValues();
 
-    void printStatus();
+    void printStatus(); // This is just for debugging, it is not part of the requested interface.
 }

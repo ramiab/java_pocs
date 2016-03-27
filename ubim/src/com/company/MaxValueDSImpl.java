@@ -61,9 +61,9 @@ public class MaxValueDSImpl implements IMaxValueDS {
             }
             else {
                 itemsSet.add(item);
-                int prevCount = count-1;
-                innerRemove(prevCount, item);
             }
+            innerRemove(count-1, item);
+
         }
 
         boolean remove(int count, String item) {
@@ -76,9 +76,8 @@ public class MaxValueDSImpl implements IMaxValueDS {
             Set<String> itemsSet = innerCountersMap.get(count);
             if (itemsSet != null) {
                 itemsSet.remove(item);
-                if( itemsSet.isEmpty() ){
+                if(itemsSet.isEmpty())
                     innerCountersMap.remove(count);
-                }
             }
 
             return true;
