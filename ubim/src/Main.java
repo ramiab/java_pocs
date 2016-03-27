@@ -1,5 +1,7 @@
+import com.company.DataStructImpl2;
 import com.company.Simulator;
 
+import java.util.Collection;
 import java.util.Set;
 
 /**
@@ -9,7 +11,7 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
 
         //
-        // Process String objects
+        // Use DataStruct Implementation 1
         //
         System.out.println("1 --> Start.");
         String[] itemsPool = "abcdef".split("");
@@ -17,23 +19,22 @@ public class Main {
 
         simulator.start();
         Thread.sleep(10 * 1000);
-        Set<Object> maxValuesOnTermination = simulator.stop();
+        Collection<Object> maxValuesOnTermination = simulator.stop();
 
         System.out.println("maxValuesOnTermination = " + maxValuesOnTermination);
         System.out.println("1 --> Done.");
 
         //
-        // Process Integer objects
+        // Use DataStruct Implementation 2
         //
         System.out.println("2 --> Start.");
-        Integer[] itemsPool2 = {1000, 2000, 3000, 4000, 5000 };
-        Simulator simulator2 = new Simulator(itemsPool2);
+        simulator = new Simulator(itemsPool, new DataStructImpl2());
 
-        simulator2.start();
+        simulator.start();
         Thread.sleep(10 * 1000);
-        Set<Object> maxValuesOnTermination2 = simulator2.stop();
+        maxValuesOnTermination = simulator.stop();
 
-        System.out.println("maxValuesOnTermination2 = " + maxValuesOnTermination2);
+        System.out.println("maxValuesOnTermination = " + maxValuesOnTermination);
         System.out.println("2 --> Done.");
     }
 }

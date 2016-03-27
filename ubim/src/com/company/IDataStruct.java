@@ -1,6 +1,6 @@
 package com.company;
 
-import java.util.Set;
+import java.util.Collection;
 
 /**
  * Created by rami on 3/27/2016.
@@ -12,7 +12,7 @@ public interface IDataStruct {
 
     Integer getValue(Object item);
 
-    Set<Object> getMaxValues();
+    Collection<Object> getMaxValues();
 
     void printStatus(); // This is just for debugging, it is not part of the requested interface.
 }

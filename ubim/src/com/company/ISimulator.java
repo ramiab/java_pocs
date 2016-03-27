@@ -1,5 +1,6 @@
 package com.company;
 
+import java.util.Collection;
 import java.util.Set;
 
 /**
@@ -8,5 +9,5 @@ import java.util.Set;
 public interface ISimulator {
     void start();
 
-    Set<Object> stop();
+    Collection<Object> stop();
 }

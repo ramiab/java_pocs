@@ -9,7 +9,7 @@ public class DataStructImpl2 implements IDataStruct {
     Map<Object, Integer> itemsMap = new HashMap<>();
 
     /**
-     * Avg. Complexity: O(1) - If we have good hashing and lots of memory.
+     * Avg. Complexity: O(1)
      *
      * @param item
      */
@@ -18,11 +18,11 @@ public class DataStructImpl2 implements IDataStruct {
         Integer currentCount = itemsMap.get(item);
         int newCount = (currentCount == null) ? 1 : currentCount + 1;
         itemsMap.put(item, newCount);
-        System.out.printf("Item Added: %s ; count = %s", item, newCount);
+        System.out.printf("Item Added: %s ; count = %s\n", item, newCount);
     }
 
     /**
-     * Avg. Complexity: O(1) - If we have good hashing and lots of memory.
+     * Avg. Complexity: O(1)
      *
      * @param item
      * @return
@@ -51,13 +51,13 @@ public class DataStructImpl2 implements IDataStruct {
     }
 
     /**
-     * Avg,Worse Complexity: O(n),O(n) respectively
+     * Complexity: O(n)
      *
      * @return
      */
     @Override
-    public Set<Object> getMaxValues() {
-        Set<Object> retMaxValues = null; // TODO: change return type to Collection
+    public Collection<Object> getMaxValues() {
+        Collection<Object> retMaxValues = null;
         int currentMaxCount = 0;
         for (Map.Entry<Object, Integer> entry : itemsMap.entrySet()) {
             Integer count = entry.getValue();

@@ -23,7 +23,7 @@ public class DataStructImpl1 implements IDataStruct {
         int newCount = (currentCount == null) ? 1 : currentCount + 1;
         countersMap.add(newCount, item);
         itemsMap.put(item, newCount);
-        System.out.printf("Item Added: %s ; count = %s", item, newCount);
+        System.out.printf("Item Added: %s ; count = %s\n", item, newCount);
     }
 
     /**
@@ -61,7 +61,7 @@ public class DataStructImpl1 implements IDataStruct {
      * @return
      */
     @Override
-    public Set<Object> getMaxValues() {
+    public Collection<Object> getMaxValues() {
         return countersMap.getMaxValues();
     }
 
@@ -123,10 +123,12 @@ public class DataStructImpl1 implements IDataStruct {
          *
          * @return
          */
-        Set<Object> getMaxValues() {
-            Set<Object> itemsSet = innerCountersMap.lastEntry().getValue();
-            assert itemsSet != null : "innerCountersMap has no data";
-            return itemsSet;
+        Collection<Object> getMaxValues() {
+            if(innerCountersMap.isEmpty())
+                return null;
+            Collection<Object> maxValues = innerCountersMap.lastEntry().getValue();
+            assert maxValues != null : "Unexpected behavior: innerCountersMap has no data.";
+            return maxValues;
         }
 
         public String toString() {

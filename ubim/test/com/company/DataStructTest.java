@@ -1,9 +1,9 @@
 package com.company;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import static org.junit.Assert.*;
 
@@ -11,8 +11,8 @@ import static org.junit.Assert.*;
  * Created by rami on 3/27/2016.
  */
 public class DataStructTest {
-    protected List<String> itemsList;
-    protected IDataStruct dataStruct;
+    private List<String> itemsList;
+    IDataStruct dataStruct;
 
     public DataStructTest() {
         dataStruct = new DataStructImpl1();
@@ -29,7 +29,7 @@ public class DataStructTest {
             dataStruct.add(item);
             dataStruct.printStatus();
         }
-        Set<Object> maxValues = dataStruct.getMaxValues();
+        Collection<Object> maxValues = dataStruct.getMaxValues();
         System.out.println("maxValues = " + maxValues);
 
         assertEquals(2, maxValues.size());
@@ -43,7 +43,7 @@ public class DataStructTest {
         add(); // adding items
 
         dataStruct.remove("a");
-        Set<Object> maxValues = dataStruct.getMaxValues();
+        Collection<Object> maxValues = dataStruct.getMaxValues();
         System.out.println("maxValues = " + maxValues);
 
         assertEquals(1, maxValues.size());
@@ -67,7 +67,36 @@ public class DataStructTest {
     public void getMaxValues() throws Exception {
         add(); // adding items
 
-        Set<String> expectedMaxValues = new HashSet<>(Arrays.asList("a", "b"));
+        Collection<String> expectedMaxValues = new HashSet<>(Arrays.asList("a", "b"));
         assertEquals(expectedMaxValues, dataStruct.getMaxValues());
     }
+
+    //    @org.junit.Test
+    private void simulatorCycle(Object[] itemsPool) throws Exception {
+        Simulator simulator = new Simulator(itemsPool, dataStruct);
+
+        simulator.start();
+        Thread.sleep(10 * 1000);
+        Collection<Object> maxValuesOnTermination = simulator.stop();
+
+        System.out.println("maxValuesOnTermination = " + maxValuesOnTermination);
+
+        assertTrue(!maxValuesOnTermination.isEmpty());
+        for (Object item : maxValuesOnTermination) {
+            assertTrue(Arrays.asList(itemsPool).contains(item));
+        }
+    }
+
+    @org.junit.Test
+    public void simulatorWithIntegers() throws Exception {
+        Integer[] itemsPool = {1000, 2000, 3000, 4000, 5000};
+        simulatorCycle(itemsPool);
+    }
+
+    @org.junit.Test
+    public void simulatorWithStrings() throws Exception {
+        String[] itemsPool = "abcdef".split("");
+        simulatorCycle(itemsPool);
+    }
+
 }

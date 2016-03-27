@@ -1,19 +1,25 @@
 package com.company;
 
+import java.util.Collection;
 import java.util.Random;
-import java.util.Set;
 
 /**
  * Created by rami on 3/27/2016.
  */
 public class Simulator implements ISimulator {
-    private IDataStruct maxValueDS;
+    private IDataStruct dataStruct;
     private final Object[] itemsPool;
     private Thread itemsAdderThread;
     private boolean isStop;
 
     public Simulator(Object[] itemsPool) {
-        maxValueDS = new DataStructImpl1();
+        dataStruct = new DataStructImpl1();
+        this.itemsPool = itemsPool;
+        itemsAdderThread = new Thread(new ItemsAdder());
+    }
+
+    public Simulator(Object[] itemsPool, IDataStruct theDataStruct) {
+        dataStruct = theDataStruct;
         this.itemsPool = itemsPool;
         itemsAdderThread = new Thread(new ItemsAdder());
     }
@@ -24,10 +30,10 @@ public class Simulator implements ISimulator {
             while (!isStop) {
                 int randomIndex = new Random().nextInt(itemsPool.length);
                 Object randomItem = itemsPool[randomIndex];
-                maxValueDS.add(randomItem);
-                maxValueDS.printStatus();
+                dataStruct.add(randomItem);
+                dataStruct.printStatus();
                 try {
-                    Thread.sleep(1000); // TODO: remove this
+                    Thread.sleep(1000); // TODO: remove this, For debug only.
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -42,10 +48,10 @@ public class Simulator implements ISimulator {
     }
 
     @Override
-    public Set<Object> stop() {
+    public Collection<Object> stop() {
         System.out.println("Stopping itemsAdderThread...");
         isStop = true;
-        return maxValueDS.getMaxValues();
+        return dataStruct.getMaxValues();
     }
 
 }
