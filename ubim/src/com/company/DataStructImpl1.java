@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * Created by rami on 3/27/2016.
  */
-public class MaxValueDSImpl implements IMaxValueDS {
+public class DataStructImpl1 implements IDataStruct {
     private Map <String, Integer> itemsMap = new HashMap<>();
     private CountersMap countersMap = new CountersMap();
 
@@ -32,7 +32,7 @@ public class MaxValueDSImpl implements IMaxValueDS {
     }
 
     @Override
-    public int getValue(String item) {
+    public Integer getValue(String item) {
         return itemsMap.get(item);
     }
 
@@ -73,14 +73,15 @@ public class MaxValueDSImpl implements IMaxValueDS {
         }
 
         private boolean innerRemove(int count, String item) {
+            boolean retVal = true;
             Set<String> itemsSet = innerCountersMap.get(count);
             if (itemsSet != null) {
-                itemsSet.remove(item);
+                retVal = itemsSet.remove(item);
                 if(itemsSet.isEmpty())
                     innerCountersMap.remove(count);
             }
 
-            return true;
+            return retVal;
         }
 
         Set<String> getMaxValues() {

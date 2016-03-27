@@ -10,14 +10,14 @@ import static org.junit.Assert.*;
 /**
  * Created by rami on 3/27/2016.
  */
-public class MaxValueDSImplTest {
+public class DataStructImpl1Test {
     private List<String> itemsList;
-    private MaxValueDSImpl maxValueDSImpl;
+    private DataStructImpl1 maxValueDSImpl;
 
     @org.junit.Before
     public void setUp() throws Exception {
         itemsList = Arrays.asList("a", "b", "b", "c", "a");
-        maxValueDSImpl = new MaxValueDSImpl();
+        maxValueDSImpl = new DataStructImpl1();
     }
 
     @org.junit.Test
@@ -53,11 +53,11 @@ public class MaxValueDSImplTest {
     public void getValue() throws Exception {
         add(); // adding items
 
-        assertEquals(2, maxValueDSImpl.getValue("a"));
-        assertEquals(1, maxValueDSImpl.getValue("c"));
+        assertEquals(2, maxValueDSImpl.getValue("a").intValue());
+        assertEquals(1, maxValueDSImpl.getValue("c").intValue());
 
         maxValueDSImpl.remove("a");
-        assertEquals(1, maxValueDSImpl.getValue("a"));
+        assertNull(maxValueDSImpl.getValue("a"));
     }
 
     @org.junit.Test

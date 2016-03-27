@@ -7,13 +7,13 @@ import java.util.Set;
  * Created by rami on 3/27/2016.
  */
 public class Simulator implements ISimulator{
-    private IMaxValueDS maxValueDS;
+    private IDataStruct maxValueDS;
     private final String[] itemsPool;
     private Thread itemsAdderThread;
     private boolean isStop;
 
     public Simulator(String[] itemsPool) {
-        maxValueDS = new MaxValueDSImpl();
+        maxValueDS = new DataStructImpl1();
         this.itemsPool = itemsPool;
         itemsAdderThread = new Thread(new ItemsAdder());
     }
