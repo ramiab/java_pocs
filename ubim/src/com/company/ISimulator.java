@@ -7,5 +7,5 @@ import java.util.Set;
  */
 public interface ISimulator {
     void start();
-    Set<String> stop();
+    Set<Object> stop();
 }

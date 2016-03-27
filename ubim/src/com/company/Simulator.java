@@ -42,7 +42,7 @@ public class Simulator implements ISimulator{
     }
 
     @Override
-    public Set<String> stop() {
+    public Set<Object> stop() {
         System.out.println("Stopping itemsAdderThread...");
         isStop = true;
         return maxValueDS.getMaxValues();

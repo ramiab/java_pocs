@@ -6,11 +6,11 @@ import java.util.*;
  * Created by rami on 3/27/2016.
  */
 public class DataStructImpl1 implements IDataStruct {
-    private Map <String, Integer> itemsMap = new HashMap<>();
+    private Map <Object, Integer> itemsMap = new HashMap<>();
     private CountersMap countersMap = new CountersMap();
 
     @Override
-    public void add(String item) {
+    public void add(Object item) {
         Integer currentCount = itemsMap.get(item);
         int newCount = (currentCount==null) ? 1 : currentCount+1;
         countersMap.add(newCount, item);
@@ -19,7 +19,7 @@ public class DataStructImpl1 implements IDataStruct {
     }
 
     @Override
-    public boolean remove(String item) {
+    public boolean remove(Object item) {
         Integer currentCount = itemsMap.remove(item);
         if(currentCount==null) {
             System.out.println("Item not found, not Removed: "+item);
@@ -32,12 +32,12 @@ public class DataStructImpl1 implements IDataStruct {
     }
 
     @Override
-    public Integer getValue(String item) {
+    public Integer getValue(Object item) {
         return itemsMap.get(item);
     }
 
     @Override
-    public Set<String> getMaxValues() {
+    public Set<Object> getMaxValues() {
         return countersMap.getMaxValues();
     }
 
@@ -50,10 +50,10 @@ public class DataStructImpl1 implements IDataStruct {
     }
 
     private class CountersMap {
-        private TreeMap<Integer, Set<String>> innerCountersMap = new TreeMap<>();
+        private TreeMap<Integer, Set<Object>> innerCountersMap = new TreeMap<>();
 
-        void add(int count, String item) {
-            Set<String> itemsSet = innerCountersMap.get(count);
+        void add(int count, Object item) {
+            Set<Object> itemsSet = innerCountersMap.get(count);
             if( null == innerCountersMap.get(count) ) {
                 itemsSet = new HashSet<>();
                 itemsSet.add(item);
@@ -66,15 +66,15 @@ public class DataStructImpl1 implements IDataStruct {
 
         }
 
-        boolean remove(int count, String item) {
-            Set<String> itemsSet = innerCountersMap.get(count);
+        boolean remove(int count, Object item) {
+            Set<Object> itemsSet = innerCountersMap.get(count);
             assert itemsSet!=null : "itemsSet doesn't exist for count " + count;
             return innerRemove(count, item);
         }
 
-        private boolean innerRemove(int count, String item) {
+        private boolean innerRemove(int count, Object item) {
             boolean retVal = true;
-            Set<String> itemsSet = innerCountersMap.get(count);
+            Set<Object> itemsSet = innerCountersMap.get(count);
             if (itemsSet != null) {
                 retVal = itemsSet.remove(item);
                 if(itemsSet.isEmpty())
@@ -84,17 +84,17 @@ public class DataStructImpl1 implements IDataStruct {
             return retVal;
         }
 
-        Set<String> getMaxValues() {
-            Set<String> itemsSet = innerCountersMap.lastEntry().getValue();
+        Set<Object> getMaxValues() {
+            Set<Object> itemsSet = innerCountersMap.lastEntry().getValue();
             assert itemsSet!=null : "innerCountersMap has no data";
             return itemsSet;
         }
         
         public String toString(){
             StringBuilder sb = new StringBuilder();
-            for(Map.Entry<Integer, Set<String>> entry : innerCountersMap.entrySet()) {
+            for(Map.Entry<Integer, Set<Object>> entry : innerCountersMap.entrySet()) {
                 Integer key = entry.getKey();
-                Set<String> value = entry.getValue();
+                Set<Object> value = entry.getValue();
                 sb.append("              ").append(key).append(" => ").append(value).append("\n");
             }
             return sb.toString();

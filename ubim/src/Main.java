@@ -14,7 +14,7 @@ public class Main {
             Simulator simulator = new Simulator(itemsPool);
             simulator.start();
             Thread.sleep(30*1000);
-            Set<String> maxValuesOnTermination = simulator.stop();
+            Set<Object> maxValuesOnTermination = simulator.stop();
             System.out.println("maxValuesOnTermination = "+maxValuesOnTermination);
             System.out.println("Done.");
         }

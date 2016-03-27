@@ -26,7 +26,7 @@ public class DataStructImpl1Test {
             maxValueDSImpl.add(item);
             maxValueDSImpl.printStatus();
         }
-        Set<String> maxValues = maxValueDSImpl.getMaxValues();
+        Set<Object> maxValues = maxValueDSImpl.getMaxValues();
         System.out.println("maxValues = "+maxValues);
 
         assertEquals(2, maxValues.size());
@@ -40,7 +40,7 @@ public class DataStructImpl1Test {
         add(); // adding items
 
         maxValueDSImpl.remove("a");
-        Set<String> maxValues = maxValueDSImpl.getMaxValues();
+        Set<Object> maxValues = maxValueDSImpl.getMaxValues();
         System.out.println("maxValues = "+maxValues);
 
         assertEquals(1, maxValues.size());
