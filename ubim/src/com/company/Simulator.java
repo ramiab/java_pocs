@@ -15,23 +15,24 @@ public class Simulator implements ISimulator{
     public Simulator(String[] itemsPool) {
         maxValueDS = new MaxValueDSImpl();
         this.itemsPool = itemsPool;
-        itemsAdderThread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (!isStop) {
-                    int randomIndex = new Random().nextInt(itemsPool.length);
-                    String randomItem = itemsPool[randomIndex];
-                    maxValueDS.add(randomItem);
-                    maxValueDS.printStatus();
-                    try {
-                        Thread.sleep(1000); // TODO: remove this
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+        itemsAdderThread = new Thread(new ItemsAdder());
+    }
+
+    private class ItemsAdder implements Runnable {
+        @Override
+        public void run() {
+            while (!isStop) {
+                int randomIndex = new Random().nextInt(itemsPool.length);
+                String randomItem = itemsPool[randomIndex];
+                maxValueDS.add(randomItem);
+                maxValueDS.printStatus();
+                try {
+                    Thread.sleep(1000); // TODO: remove this
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
             }
-        });
-
+        }
     }
 
     @Override
@@ -57,7 +58,7 @@ public class Simulator implements ISimulator{
         Thread.sleep(30*1000);
         Set<String> maxValuesOnTermination = simulator.stop();
         System.out.println("maxValuesOnTermination = "+maxValuesOnTermination);
-
+        System.out.println("Done.");
     }
 
 }
