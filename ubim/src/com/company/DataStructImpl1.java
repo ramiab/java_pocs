@@ -4,11 +4,19 @@ import java.util.*;
 
 /**
  * Created by rami on 3/27/2016.
+ *
+ * @see <a href="http://infotechgems.blogspot.co.il/2011/11/java-collections-performance-time.html">Java Collections – Performance (Time Complexity)</a>
+ *
  */
 public class DataStructImpl1 implements IDataStruct {
     private Map<Object, Integer> itemsMap = new HashMap<>();
     private CountersMap countersMap = new CountersMap();
 
+    /**
+     * Complexity: O(1)+O(log n) = O(log n)
+     *
+     * @param item
+     */
     @Override
     public void add(Object item) {
         Integer currentCount = itemsMap.get(item);
@@ -18,6 +26,12 @@ public class DataStructImpl1 implements IDataStruct {
         System.out.printf("Item Added: %s ; count = %s", item, newCount);
     }
 
+    /**
+     * Complexity: O(1)+O(log n) = O(log n)
+     *
+     * @param item
+     * @return
+     */
     @Override
     public boolean remove(Object item) {
         Integer currentCount = itemsMap.remove(item);
@@ -30,11 +44,22 @@ public class DataStructImpl1 implements IDataStruct {
         }
     }
 
+    /**
+     * Complexity: O(1)
+     *
+     * @param item
+     * @return
+     */
     @Override
     public Integer getValue(Object item) {
         return itemsMap.get(item);
     }
 
+    /**
+     * Complexity: O(1)
+     *
+     * @return
+     */
     @Override
     public Set<Object> getMaxValues() {
         return countersMap.getMaxValues();
@@ -51,6 +76,12 @@ public class DataStructImpl1 implements IDataStruct {
     private class CountersMap {
         private TreeMap<Integer, Set<Object>> innerCountersMap = new TreeMap<>();
 
+        /**
+         * Avg Complexity: O(log n)
+         *
+         * @param count
+         * @param item
+         */
         void add(int count, Object item) {
             Set<Object> itemsSet = innerCountersMap.get(count);
             if (null == innerCountersMap.get(count)) {
@@ -61,9 +92,14 @@ public class DataStructImpl1 implements IDataStruct {
                 itemsSet.add(item);
             }
             innerRemove(count - 1, item);
-
         }
 
+        /**
+         * Avg Complexity: O(log n)
+         *
+         * @param count
+         * @param item
+         */
         boolean remove(int count, Object item) {
             Set<Object> itemsSet = innerCountersMap.get(count);
             assert itemsSet != null : "itemsSet doesn't exist for count " + count;
@@ -82,6 +118,11 @@ public class DataStructImpl1 implements IDataStruct {
             return retVal;
         }
 
+        /**
+         * Avg Complexity: O(1)
+         *
+         * @return
+         */
         Set<Object> getMaxValues() {
             Set<Object> itemsSet = innerCountersMap.lastEntry().getValue();
             assert itemsSet != null : "innerCountersMap has no data";

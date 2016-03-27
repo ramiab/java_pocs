@@ -8,6 +8,11 @@ import java.util.*;
 public class DataStructImpl2 implements IDataStruct {
     Map<Object, Integer> itemsMap = new HashMap<>();
 
+    /**
+     * Avg. Complexity: O(1) - If we have good hashing and lots of memory.
+     *
+     * @param item
+     */
     @Override
     public void add(Object item) {
         Integer currentCount = itemsMap.get(item);
@@ -16,6 +21,12 @@ public class DataStructImpl2 implements IDataStruct {
         System.out.printf("Item Added: %s ; count = %s", item, newCount);
     }
 
+    /**
+     * Avg. Complexity: O(1) - If we have good hashing and lots of memory.
+     *
+     * @param item
+     * @return
+     */
     @Override
     public boolean remove(Object item) {
         Integer currentCount = itemsMap.remove(item);
@@ -28,11 +39,22 @@ public class DataStructImpl2 implements IDataStruct {
         }
     }
 
+    /**
+     * Avg,Worse Complexity: O(1),O(n) respectively - If we have good hashing and lots of memory.
+     *
+     * @param item
+     * @return
+     */
     @Override
     public Integer getValue(Object item) {
         return itemsMap.get(item);
     }
 
+    /**
+     * Avg,Worse Complexity: O(n),O(n) respectively
+     *
+     * @return
+     */
     @Override
     public Set<Object> getMaxValues() {
         Set<Object> retMaxValues = null; // TODO: change return type to Collection
