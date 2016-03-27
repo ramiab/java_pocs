@@ -6,13 +6,13 @@ import java.util.Set;
 /**
  * Created by rami on 3/27/2016.
  */
-public class Simulator implements ISimulator{
+public class Simulator implements ISimulator {
     private IDataStruct maxValueDS;
-    private final String[] itemsPool;
+    private final Object[] itemsPool;
     private Thread itemsAdderThread;
     private boolean isStop;
 
-    public Simulator(String[] itemsPool) {
+    public Simulator(Object[] itemsPool) {
         maxValueDS = new DataStructImpl1();
         this.itemsPool = itemsPool;
         itemsAdderThread = new Thread(new ItemsAdder());
@@ -23,7 +23,7 @@ public class Simulator implements ISimulator{
         public void run() {
             while (!isStop) {
                 int randomIndex = new Random().nextInt(itemsPool.length);
-                String randomItem = itemsPool[randomIndex];
+                Object randomItem = itemsPool[randomIndex];
                 maxValueDS.add(randomItem);
                 maxValueDS.printStatus();
                 try {

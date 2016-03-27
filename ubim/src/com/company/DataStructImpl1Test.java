@@ -22,12 +22,12 @@ public class DataStructImpl1Test {
 
     @org.junit.Test
     public void add() throws Exception {
-        for (String item:itemsList) {
+        for (String item : itemsList) {
             maxValueDSImpl.add(item);
             maxValueDSImpl.printStatus();
         }
         Set<Object> maxValues = maxValueDSImpl.getMaxValues();
-        System.out.println("maxValues = "+maxValues);
+        System.out.println("maxValues = " + maxValues);
 
         assertEquals(2, maxValues.size());
         assertTrue(maxValues.contains("a"));
@@ -41,7 +41,7 @@ public class DataStructImpl1Test {
 
         maxValueDSImpl.remove("a");
         Set<Object> maxValues = maxValueDSImpl.getMaxValues();
-        System.out.println("maxValues = "+maxValues);
+        System.out.println("maxValues = " + maxValues);
 
         assertEquals(1, maxValues.size());
         assertTrue(!maxValues.contains("a"));
