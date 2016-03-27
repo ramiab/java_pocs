@@ -15,7 +15,7 @@ public class DataStructImpl1 implements IDataStruct {
         int newCount = (currentCount == null) ? 1 : currentCount + 1;
         countersMap.add(newCount, item);
         itemsMap.put(item, newCount);
-        System.out.println("Item Added: " + item);
+        System.out.printf("Item Added: %s ; count = %s", item, newCount);
     }
 
     @Override
