@@ -48,17 +48,4 @@ public class Simulator implements ISimulator{
         return maxValueDS.getMaxValues();
     }
 
-    public static void main(String[] args) throws InterruptedException {
-
-        String[] itemsPool = "abcdef".split("");
-//        String[] itemsPool = "abcdefghijklmnopqrstuvwxyz".split("");
-
-        Simulator simulator = new Simulator(itemsPool);
-        simulator.start();
-        Thread.sleep(30*1000);
-        Set<String> maxValuesOnTermination = simulator.stop();
-        System.out.println("maxValuesOnTermination = "+maxValuesOnTermination);
-        System.out.println("Done.");
-    }
-
 }
