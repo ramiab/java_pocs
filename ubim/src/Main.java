@@ -6,6 +6,11 @@ import java.util.Set;
 
 /**
  * Created by rami on 3/27/2016.
+ *
+ * Runs the Simulator twice for 10 seconds:
+ * 1. with default implementation - DataStructImpl1 .
+ * 2. with 2nd implementation - DataStructImpl2 .
+ *
  */
 public class Main {
     public static void main(String[] args) throws InterruptedException {

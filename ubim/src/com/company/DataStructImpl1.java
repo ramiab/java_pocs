@@ -5,6 +5,24 @@ import java.util.*;
 /**
  * Created by rami on 3/27/2016.
  *
+ * This IDataStruct implementaion is based on the following members:
+ *      - itemsMap    - HashMap<Object, Integer>            of Item  --> Count .
+ *      - countersMap - TreeMap<Integer, HashSet<Object>>   of Count --> set-of-Items-with-this-count .
+ * A CountersMap inner class encapsulates and manages the counterMap behavior.
+ *
+ * Algorithms:
+ * ADD - item is added both into the itemsMap and the countersMap.
+ *       In the counterMap we remove the item from the previous-count and insert it to the current-count.
+ *       This costs O(log n) due to the TreeMap insertion/removal.
+ *
+ * REMOVE - removal is also done from both collections.  This costs O(log n) due to the TreeMap removal.
+ * GET_VALUE - simple access to the itemsMap. O(1).
+ * GET_MAX_VALUES - simple access to the countersMap and return the corresponding items-collection. O(1).
+ *
+ * This implementation favors getMaxValues -> O(1) , getValue --> O(1) , while it has a larger memory footprint and add --> O(log n).
+ *
+ * Each DataStruct operation is documented with general complexity.
+ * Complexity table that was referenced:
  * @see <a href="http://infotechgems.blogspot.co.il/2011/11/java-collections-performance-time.html">Java Collections – Performance (Time Complexity)</a>
  *
  */
@@ -77,7 +95,7 @@ public class DataStructImpl1 implements IDataStruct {
         private TreeMap<Integer, Set<Object>> innerCountersMap = new TreeMap<>();
 
         /**
-         * Avg Complexity: O(log n)
+         * Complexity: O(log n)
          *
          * @param count
          * @param item
@@ -95,7 +113,7 @@ public class DataStructImpl1 implements IDataStruct {
         }
 
         /**
-         * Avg Complexity: O(log n)
+         * Complexity: O(log n)
          *
          * @param count
          * @param item
@@ -119,7 +137,7 @@ public class DataStructImpl1 implements IDataStruct {
         }
 
         /**
-         * Avg Complexity: O(1)
+         * Complexity: O(1)
          *
          * @return
          */
